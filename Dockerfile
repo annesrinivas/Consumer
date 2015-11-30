@@ -11,7 +11,12 @@ RUN apt-get install oracle-java8-set-default
 
 RUN apt-get -y install tomcat7
 RUN echo "JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> /etc/default/tomcat7
-EXPOSE 8080
 
-CMD service tomcat7 start && tail -f /var/lib/tomcat7/logs/catalina.out
+EXPOSE 9999
 
+COPY war /var/lib/tomcat7/webapps
+
+# CMD service tomcat7 start && tail -f /var/lib/tomcat7/logs/catalina.out
+
+ 
+ 
