@@ -11,12 +11,13 @@ RUN apt-get install oracle-java8-installer -y
 RUN apt-get install oracle-java8-set-default
 RUN apt-get install curl -y
 
-#install mongodb
+#install mongodb 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-RUN echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.0.list.d/mongodb-org-3.0.list
+RUN echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 RUN apt-get update && apt-get install -y mongodb-org
 RUN mkdir -p /data/db
-EXPOSE 27017
+EXPOSE 27017 
+
 
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
