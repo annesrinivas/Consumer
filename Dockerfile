@@ -1,7 +1,7 @@
-#Start with ubuntu
-FROM ubuntu:14.04
+#Start with ubuntu 
+FROM ubuntu:14.04 
 
-#install java
+#install java 
 RUN apt-get update
 RUN apt-get install software-properties-common -y
 RUN add-apt-repository ppa:webupd8team/java -y
@@ -39,6 +39,7 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 	F3A04C595DB5B6A5F1ECA43E3B7BBB100D811BBE \
 	F7DA48BB64BCB84ECBA7EE6935CD23C10D498E23
 
+#install tomcat8
 ENV TOMCAT_MAJOR 8
 ENV TOMCAT_VERSION 8.0.29
 ENV TOMCAT_TGZ_URL https://www.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
@@ -52,9 +53,19 @@ RUN set -x \
 	&& rm tomcat.tar.gz*
 
 EXPOSE 8080
-
-#install consumer service
-COPY war /usr/local/tomcat/webapps
-
-
 CMD ["catalina.sh", "run"]
+
+
+# Start the tomcat (and leave it hanging)
+#CMD service tomcat7 start && tail -f /var/lib/tomcat7/logs/catalina.out
+
+#install consumer service COPY war /usr/local/tomcat/webapps
+
+#start tomcat 
+#EXPOSE 8080 
+#RUN /usr/local/tomcat/bin/catalina.sh start
+#CMD tail -f /usr/local/tomcat/logs/catalina.ou
+
+
+
+
