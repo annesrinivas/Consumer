@@ -56,9 +56,3 @@ COPY war /usr/local/tomcat/webapps
 
 #Start tomcat
 CMD ["catalina.sh", "run"]
-
-
-#to run
-#docker pull annesrinivas/consumer
-#docker run  -p 8080:8080 -i -t --name consumer annesrinivas/consumer /bin/bash
-#start tomcat
