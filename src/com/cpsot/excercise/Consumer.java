@@ -49,21 +49,9 @@ public class Consumer {
 		
 	 // Insert into MongoDB
 	  try {
-		/* Connect to MongoDB */
-	 	//MongoClient mongo = new MongoClient("localhost", 27017);
-	 	
-	 	/* Get database */
-		//DB db = mongo.getDB("customer_event_repository");
-		
-		/* Get collection from 'customer_events' */
-		//DBCollection table = db.getCollection("customer_events");
-		
+				
 		/* Parse JSON to build DBObject and insert into collection */
 		DBObject dbo = (DBObject) com.mongodb.util.JSON.parse(jsonBuilder.toString());
-		
-		//List<DBObject> list = new ArrayList<>();
-		//list.add(dbo);
-		
 		new MongoClient().getDB("customer_event_repository").getCollection("customer_events").insert(dbo);
 		
 		System.out.println("Done inserting into Mongo");
@@ -88,6 +76,8 @@ public class Consumer {
  
 		// return HTTP response 200 in case of success
 		return Response.status(200).entity(result).build();
+		
+		
 	}
  
 }

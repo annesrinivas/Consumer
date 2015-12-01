@@ -1,4 +1,4 @@
-#Start with ubuntu 
+#Start with ubuntu base image
 FROM ubuntu:14.04 
 
 #install java 
@@ -18,13 +18,11 @@ RUN apt-get update && apt-get install -y mongodb-org
 RUN mkdir -p /data/db
 EXPOSE 27017 
 
-
+#install tomcat 8
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
 RUN mkdir -p "$CATALINA_HOME"
 WORKDIR $CATALINA_HOME
-
-# see https://www.apache.org/dist/tomcat/tomcat-8/KEYS
 RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 	05AB33110949707C93A279E3D3EFE6B686867BA6 \
 	07E48665A34DCAFAE522E5E6266191C37C037D42 \
@@ -39,7 +37,6 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 	F3A04C595DB5B6A5F1ECA43E3B7BBB100D811BBE \
 	F7DA48BB64BCB84ECBA7EE6935CD23C10D498E23
 
-#install tomcat8
 ENV TOMCAT_MAJOR 8
 ENV TOMCAT_VERSION 8.0.29
 ENV TOMCAT_TGZ_URL https://www.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
@@ -54,19 +51,14 @@ RUN set -x \
 
 EXPOSE 8080
 
-#install consumer service 
+#install Consumer service 
 COPY war /usr/local/tomcat/webapps
 
+#Start tomcat
 CMD ["catalina.sh", "run"]
 
 
-
-
-#start tomcat 
-#EXPOSE 8080 
-#RUN /usr/local/tomcat/bin/catalina.sh start
-#CMD tail -f /usr/local/tomcat/logs/catalina.ou
-
-
-
-
+#to run
+#docker pull annesrinivas/consumer
+#docker run  -p 8080:8080 -i -t --name consumer annesrinivas/consumer /bin/bash
+#start tomcat
