@@ -1,5 +1,5 @@
 #Start with ubuntu
-FROM ubuntu:15.04
+FROM ubuntu:14.04
 
 #install java
 RUN apt-get update
