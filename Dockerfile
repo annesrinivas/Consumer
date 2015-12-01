@@ -53,13 +53,14 @@ RUN set -x \
 	&& rm tomcat.tar.gz*
 
 EXPOSE 8080
+
+#install consumer service 
+COPY war /usr/local/tomcat/webapps
+
 CMD ["catalina.sh", "run"]
 
 
-# Start the tomcat (and leave it hanging)
-#CMD service tomcat7 start && tail -f /var/lib/tomcat7/logs/catalina.out
 
-#install consumer service COPY war /usr/local/tomcat/webapps
 
 #start tomcat 
 #EXPOSE 8080 
